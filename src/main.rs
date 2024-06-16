@@ -38,11 +38,13 @@ fn main() {
             // downloads new version and runs new binary
             let need_restart = update("frederik-uni", "rust-update", "rust-update").unwrap();
             if need_restart {
+                drop(cli);
                 Command::new(env::current_exe().unwrap()).spawn().unwrap();
                 exit(0);
             }
         }
     }
+    println!("Hello World")
 }
 
 fn migration_scripts() -> HashMap<Version, &'static Path> {
