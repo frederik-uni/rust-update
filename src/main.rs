@@ -39,7 +39,10 @@ fn main() {
             let need_restart = update("frederik-uni", "rust-update", "rust-update").unwrap();
             if need_restart {
                 drop(cli);
-                Command::new(env::current_exe().unwrap()).spawn().unwrap();
+                Command::new(env::current_exe().unwrap())
+                    .args(["--migrate", cargo_crate_version!()])
+                    .spawn()
+                    .unwrap();
                 exit(0);
             }
         }
